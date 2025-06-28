@@ -1,0 +1,1196 @@
+{
+  "nodes": [
+    {
+      "path": "src/entities/customer-0.ts",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../services/cache-service-4",
+          "imports": [
+            {
+              "name": "CacheService",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/entities/customer-0.ts",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "Settings",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/entities/customer-0.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "interface",
+          "extends": [
+            "BaseType"
+          ]
+        },
+        {
+          "name": "Customer1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/entities/customer-0.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "interface",
+          "extends": [
+            "BaseType"
+          ]
+        },
+        {
+          "name": "Settings2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/entities/customer-0.ts",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "type"
+        }
+      ]
+    },
+    {
+      "path": "src/utils/deep-clone-1.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "calculateSum",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/utils/deep-clone-1.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        },
+        {
+          "name": "parseJSON1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/utils/deep-clone-1.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "class"
+        },
+        {
+          "name": "deepClone2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/utils/deep-clone-1.ts",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "function",
+          "isAsync": false,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "any"
+        }
+      ]
+    },
+    {
+      "path": "src/components/button-2.jsx",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../lib/parse-j-s-o-n-11",
+          "imports": [
+            {
+              "name": "parseJSON2",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/components/button-2.jsx",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "Form",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/components/button-2.jsx",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        }
+      ]
+    },
+    {
+      "path": "src/utils/format-date-3.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "formatDate",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/utils/format-date-3.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        }
+      ]
+    },
+    {
+      "path": "src/services/cache-service-4.js",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "CacheService",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/services/cache-service-4.js",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        },
+        {
+          "name": "CacheService1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/services/cache-service-4.js",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        },
+        {
+          "name": "CacheService2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/services/cache-service-4.js",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "function",
+          "isAsync": false,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "any"
+        }
+      ]
+    },
+    {
+      "path": "src/lib/cache-service-5.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "DataService",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/lib/cache-service-5.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "class"
+        }
+      ]
+    },
+    {
+      "path": "src/models/customer-6.ts",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../components/button-2",
+          "imports": [
+            {
+              "name": "Form",
+              "isDefault": true,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/models/customer-6.ts",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        },
+        {
+          "type": "import",
+          "from": "./../lib/deep-clone-8",
+          "imports": [
+            {
+              "name": "parseJSON",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/models/customer-6.ts",
+          "position": {
+            "line": 2,
+            "column": 0,
+            "offset": 50
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "Settings",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/models/customer-6.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "interface",
+          "extends": []
+        },
+        {
+          "name": "Order1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/models/customer-6.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "interface",
+          "extends": []
+        }
+      ]
+    },
+    {
+      "path": "src/@types/action-7.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "Action",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/@types/action-7.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "interface",
+          "extends": []
+        }
+      ]
+    },
+    {
+      "path": "src/lib/deep-clone-8.js",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../@types/state-14",
+          "imports": [
+            {
+              "name": "Config",
+              "isDefault": true,
+              "isNamespace": false
+            },
+            {
+              "name": "UserType1",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/lib/deep-clone-8.js",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "parseJSON",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/lib/deep-clone-8.js",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        }
+      ]
+    },
+    {
+      "path": "src/views/modal-9.jsx",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "Table",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/views/modal-9.jsx",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        },
+        {
+          "name": "Button1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/views/modal-9.jsx",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        },
+        {
+          "name": "Form2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/views/modal-9.jsx",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        }
+      ]
+    },
+    {
+      "path": "src/types/api-response-10.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "State",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/types/api-response-10.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "type"
+        },
+        {
+          "name": "UserType1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/types/api-response-10.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "type"
+        },
+        {
+          "name": "Config2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/types/api-response-10.ts",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "type"
+        }
+      ]
+    },
+    {
+      "path": "src/lib/parse-j-s-o-n-11.js",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../utils/calculate-sum-12",
+          "imports": [
+            {
+              "name": "validateEmail",
+              "isDefault": true,
+              "isNamespace": false
+            },
+            {
+              "name": "validateEmail1",
+              "isDefault": false,
+              "isNamespace": false
+            },
+            {
+              "name": "validateEmail2",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/lib/parse-j-s-o-n-11.js",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "validateEmail",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/lib/parse-j-s-o-n-11.js",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        },
+        {
+          "name": "parseJSON1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/lib/parse-j-s-o-n-11.js",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "class"
+        },
+        {
+          "name": "parseJSON2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/lib/parse-j-s-o-n-11.js",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "class"
+        }
+      ]
+    },
+    {
+      "path": "src/utils/calculate-sum-12.js",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "validateEmail",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/utils/calculate-sum-12.js",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "isAsync": false,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "any"
+        },
+        {
+          "name": "validateEmail1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/utils/calculate-sum-12.js",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        },
+        {
+          "name": "validateEmail2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/utils/calculate-sum-12.js",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        }
+      ]
+    },
+    {
+      "path": "src/types/product-13.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "User",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/types/product-13.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "type"
+        },
+        {
+          "name": "Order1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/types/product-13.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "type"
+        }
+      ]
+    },
+    {
+      "path": "src/@types/state-14.ts",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../entities/customer-0",
+          "imports": [
+            {
+              "name": "Settings2",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/@types/state-14.ts",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "Config",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/@types/state-14.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "interface",
+          "extends": [
+            "BaseType"
+          ]
+        },
+        {
+          "name": "UserType1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/@types/state-14.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "interface",
+          "extends": []
+        }
+      ]
+    },
+    {
+      "path": "src/components/nav-15.tsx",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../lib/parse-j-s-o-n-11",
+          "imports": [
+            {
+              "name": "validateEmail",
+              "isDefault": true,
+              "isNamespace": false
+            },
+            {
+              "name": "parseJSON1",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/components/nav-15.tsx",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "List",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/components/nav-15.tsx",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        },
+        {
+          "name": "List1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/components/nav-15.tsx",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        },
+        {
+          "name": "Form2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/components/nav-15.tsx",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        }
+      ]
+    },
+    {
+      "path": "src/views/form-16.jsx",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../entities/user-17.d",
+          "imports": [
+            {
+              "name": "Product2",
+              "isDefault": false,
+              "isNamespace": false
+            },
+            {
+              "name": "User1",
+              "isDefault": false,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/views/form-16.jsx",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "List",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/views/form-16.jsx",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        },
+        {
+          "name": "Input1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/views/form-16.jsx",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        },
+        {
+          "name": "Form2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/views/form-16.jsx",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "function",
+          "parameters": [
+            {
+              "name": "props",
+              "type": "Props",
+              "optional": false
+            }
+          ],
+          "returnType": "JSX.Element"
+        }
+      ]
+    },
+    {
+      "path": "src/entities/user-17.d.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "Product",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/entities/user-17.d.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "interface",
+          "extends": [
+            "BaseType"
+          ]
+        },
+        {
+          "name": "User1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/entities/user-17.d.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "type"
+        },
+        {
+          "name": "Product2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/entities/user-17.d.ts",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "type"
+        }
+      ]
+    },
+    {
+      "path": "src/lib/deep-clone-18.ts",
+      "imports": [
+        {
+          "type": "import",
+          "from": "./../utils/format-date-3",
+          "imports": [
+            {
+              "name": "formatDate",
+              "isDefault": true,
+              "isNamespace": false
+            }
+          ],
+          "sourceFile": "src/lib/deep-clone-18.ts",
+          "position": {
+            "line": 1,
+            "column": 0,
+            "offset": 0
+          }
+        }
+      ],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "parseJSON",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/lib/deep-clone-18.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "class"
+        },
+        {
+          "name": "parseJSON1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/lib/deep-clone-18.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "function",
+          "isAsync": true,
+          "parameters": [
+            {
+              "name": "data",
+              "type": "any",
+              "optional": false
+            }
+          ],
+          "returnType": "Promise<any>"
+        }
+      ]
+    },
+    {
+      "path": "src/types/customer-19.d.ts",
+      "imports": [],
+      "exports": [],
+      "declarations": [
+        {
+          "name": "User",
+          "isExported": true,
+          "isDefault": true,
+          "sourceFile": "src/types/customer-19.d.ts",
+          "position": {
+            "line": 10,
+            "column": 0,
+            "offset": 200
+          },
+          "type": "interface",
+          "extends": []
+        },
+        {
+          "name": "Customer1",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/types/customer-19.d.ts",
+          "position": {
+            "line": 30,
+            "column": 0,
+            "offset": 600
+          },
+          "type": "interface",
+          "extends": [
+            "BaseType"
+          ]
+        },
+        {
+          "name": "Order2",
+          "isExported": true,
+          "isDefault": false,
+          "sourceFile": "src/types/customer-19.d.ts",
+          "position": {
+            "line": 50,
+            "column": 0,
+            "offset": 1000
+          },
+          "type": "interface",
+          "extends": []
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": "src/models/customer-6.ts",
+      "target": "src/components/button-2.jsx",
+      "imports": [
+        "Form"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/lib/deep-clone-18.ts",
+      "target": "src/utils/format-date-3.ts",
+      "imports": [
+        "formatDate"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/components/nav-15.tsx",
+      "target": "src/lib/parse-j-s-o-n-11.js",
+      "imports": [
+        "validateEmail",
+        "parseJSON1"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/entities/customer-0.ts",
+      "target": "src/services/cache-service-4.js",
+      "imports": [
+        "CacheService"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/components/button-2.jsx",
+      "target": "src/lib/parse-j-s-o-n-11.js",
+      "imports": [
+        "parseJSON2"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/lib/deep-clone-8.js",
+      "target": "src/@types/state-14.ts",
+      "imports": [
+        "Config",
+        "UserType1"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/views/form-16.jsx",
+      "target": "src/entities/user-17.d.ts",
+      "imports": [
+        "Product2",
+        "User1"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/@types/state-14.ts",
+      "target": "src/entities/customer-0.ts",
+      "imports": [
+        "Settings2"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/lib/parse-j-s-o-n-11.js",
+      "target": "src/utils/calculate-sum-12.js",
+      "imports": [
+        "validateEmail",
+        "validateEmail1",
+        "validateEmail2"
+      ],
+      "type": "import"
+    },
+    {
+      "source": "src/models/customer-6.ts",
+      "target": "src/lib/deep-clone-8.js",
+      "imports": [
+        "parseJSON"
+      ],
+      "type": "import"
+    }
+  ]
+}

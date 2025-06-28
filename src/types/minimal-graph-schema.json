@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/minimal-graph.schema.json",
+  "title": "Minimal Graph Schema for Generic Visualization",
+  "description": "Simplified schema for generic graph visualization supporting any domain",
+  "type": "object",
+  "required": ["nodes", "links"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "description": "Array of nodes in the graph",
+      "items": {
+        "$ref": "#/definitions/Node"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "links": {
+      "type": "array",
+      "description": "Array of edges/connections between nodes",
+      "items": {
+        "$ref": "#/definitions/Link"
+      }
+    }
+  },
+  "definitions": {
+    "Node": {
+      "type": "object",
+      "description": "A node in the graph",
+      "required": ["id", "label"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the node",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "description": "Display name for the node",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "Category or type of node",
+          "examples": ["file", "function", "class", "service", "component"]
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional properties specific to the domain",
+          "additionalProperties": true
+        },
+        "x": {
+          "type": "number",
+          "description": "Optional fixed X position"
+        },
+        "y": {
+          "type": "number", 
+          "description": "Optional fixed Y position"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Link": {
+      "type": "object",
+      "description": "A connection between two nodes",
+      "required": ["source", "target"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "ID of the source node - MUST match a node.id"
+        },
+        "target": {
+          "type": "string",
+          "description": "ID of the target node - MUST match a node.id"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of relationship",
+          "examples": ["depends", "imports", "calls", "extends", "references"]
+        },
+        "weight": {
+          "type": "number",
+          "description": "Optional strength/weight of the connection",
+          "minimum": 0,
+          "default": 1
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional properties specific to the domain",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "nodes": [
+        {
+          "id": "node1",
+          "label": "Component A",
+          "type": "component"
+        },
+        {
+          "id": "node2", 
+          "label": "Service B",
+          "type": "service",
+          "metadata": {
+            "description": "Authentication service"
+          }
+        }
+      ],
+      "links": [
+        {
+          "source": "node1",
+          "target": "node2", 
+          "type": "depends",
+          "weight": 1.5
+        }
+      ]
+    }
+  ]
+}

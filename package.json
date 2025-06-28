@@ -1,0 +1,45 @@
+{
+  "name": "graph-visualizer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "generate-data": "tsx scripts/generateRandomData.ts",
+    "generate-samples": "npm run generate-samples:all",
+    "generate-samples:all": "npm run generate-samples:20 && npm run generate-samples:100 && npm run generate-samples:500 && npm run generate-samples:1k && npm run generate-samples:5k",
+    "generate-samples:20": "tsx scripts/generateRandomData.ts 20 0.5",
+    "generate-samples:100": "tsx scripts/generateRandomData.ts 100 0.5",
+    "generate-samples:500": "tsx scripts/generateRandomData.ts 500 0.5",
+    "generate-samples:1k": "tsx scripts/generateRandomData.ts 1000 0.5",
+    "generate-samples:5k": "tsx scripts/generateRandomData.ts 5000 0.5"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/d3": "^7.4.3",
+    "@types/node": "^24.0.7",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.29.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.2.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11",
+    "tsx": "^4.20.3",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.34.1",
+    "vite": "^6.3.5"
+  }
+}
