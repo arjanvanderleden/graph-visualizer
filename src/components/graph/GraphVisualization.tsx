@@ -23,7 +23,8 @@ export function GraphVisualization({ width, height, className = '' }: GraphVisua
   const zoomBehaviorRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   
   const { 
-    state: { data, viewState, settings },
+    state: { viewState, settings },
+    filteredData,
     selectNode,
     selectLink,
     setConnectedEntities,
@@ -32,6 +33,9 @@ export function GraphVisualization({ width, height, className = '' }: GraphVisua
     setHoveredLink,
     setCenterNode
   } = useGraph();
+  
+  // Use memoized filtered data
+  const data = filteredData;
   
   const viewStateRef = useRef(viewState);
 
@@ -401,6 +405,11 @@ export function GraphVisualization({ width, height, className = '' }: GraphVisua
       } else if (link) {
         const linkId = getLinkId(link);
         handleLinkSelection(linkId);
+      } else {
+        // Clicking on empty canvas - deselect everything
+        selectNode(null);
+        selectLink(null);
+        setConnectedEntities(new Set());
       }
     };
 
@@ -480,6 +489,20 @@ export function GraphVisualization({ width, height, className = '' }: GraphVisua
     window.addEventListener('downloadSVG', handleDownloadSVG);
     window.addEventListener('downloadPNG', handleDownloadPNG);
 
+    // Listen for search selection events
+    const handleSearchNodeSelect = (event: CustomEvent) => {
+      const nodeId = event.detail;
+      handleNodeSelection(nodeId);
+    };
+
+    const handleSearchLinkSelect = (event: CustomEvent) => {
+      const linkId = event.detail;
+      handleLinkSelection(linkId);
+    };
+
+    window.addEventListener('selectSearchNode', handleSearchNodeSelect as EventListener);
+    window.addEventListener('selectSearchLink', handleSearchLinkSelect as EventListener);
+
     return () => {
       svg.on('.zoom', null);
       svg.on('click', null);
@@ -488,6 +511,8 @@ export function GraphVisualization({ width, height, className = '' }: GraphVisua
       window.removeEventListener('zoomToFit', handleZoomToFit);
       window.removeEventListener('downloadSVG', handleDownloadSVG);
       window.removeEventListener('downloadPNG', handleDownloadPNG);
+      window.removeEventListener('selectSearchNode', handleSearchNodeSelect as EventListener);
+      window.removeEventListener('selectSearchLink', handleSearchLinkSelect as EventListener);
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
       }

@@ -67,6 +67,12 @@ export interface D3Link extends Omit<GraphLink, 'source' | 'target'> {
   index?: number;
 }
 
+export interface NodeFilter {
+  text: string;
+  includeMode: boolean; // true = include matching nodes, false = exclude matching nodes
+  filterDeclarations: boolean; // whether to filter by declaration names
+}
+
 export interface GraphViewState {
   selectedNode: string | null;
   selectedLink: string | null;
@@ -77,6 +83,7 @@ export interface GraphViewState {
   centerNode: string | null;
   searchQuery: string;
   highlightDepth: number;
+  nodeFilter: NodeFilter;
 }
 
 export interface GraphSettings {

@@ -58,14 +58,15 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
       const data = JSON.parse(text);
       
       if (isDependencyFormat(data)) {
-        // Process dependency format directly
+        // Process dependency format - links are already resolved by the dependency graph creator
         const processedData: GraphData = {
           nodes: data.nodes.map((node: any) => ({
             ...node,
             id: node.path
           })),
-          links: data.links
+          links: data.links // Use links directly as provided
         };
+        
         onDataLoaded(processedData);
       } else if (isGenericFormat(data)) {
         // Show property mapper for generic format
@@ -87,7 +88,7 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
     const links = genericData[mapping.linkType] || [];
     
     // Transform generic data to internal format
-    const processedData: GraphData = {
+    const basicData: GraphData = {
       nodes: genericData.nodes.map((node: any) => ({
         id: String(node[mapping.nodeId]),
         path: String(node[mapping.nodeId]),
@@ -105,6 +106,12 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
         // Preserve original data
         ...link
       }))
+    };
+    
+    // For generic data, use the mapped links directly
+    const processedData: GraphData = {
+      nodes: basicData.nodes,
+      links: basicData.links // Use links as mapped from generic format
     };
     
     setShowMapper(false);
