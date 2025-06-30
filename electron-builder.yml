@@ -1,0 +1,29 @@
+appId: com.yourcompany.graph-visualizer
+productName: Graph Visualizer
+directories:
+  output: dist-electron
+files:
+  - dist/**/*
+  - electron/**/*
+  - package.json
+  - "!electron/**/*.ts"
+  - "!electron/**/*.map"
+extraMetadata:
+  main: electron/main.js
+mac:
+  category: public.app-category.developer-tools
+  target:
+    - dmg
+    - zip
+win:
+  target:
+    - nsis
+    - zip
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Development
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true

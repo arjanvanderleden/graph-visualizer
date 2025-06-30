@@ -1,4 +1,5 @@
 // Download utilities for graph visualization
+import type { D3Node, D3Link } from '../types';
 
 export const downloadSVG = () => {
   // Dispatch custom event for SVG download
@@ -35,8 +36,8 @@ export const canvasToPNG = (canvas: HTMLCanvasElement): Promise<Blob> => {
 
 // Create SVG from graph data with proper normalization
 export const createSVGFromGraph = (
-  nodes: any[], 
-  links: any[], 
+  nodes: D3Node[], 
+  links: D3Link[], 
   width: number, 
   height: number,
   viewState?: { selectedNode?: string | null; selectedLink?: string | null; connectedEntities?: Set<string> }
@@ -75,12 +76,12 @@ export const createSVGFromGraph = (
   const transformX = (x: number) => (x - minX) * scale;
   const transformY = (y: number) => (y - minY) * scale;
 
-  // Generate link ID for comparison
-  const getLinkId = (link: any): string => {
-    const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
-    const targetId = typeof link.target === 'object' ? link.target.id : link.target;
-    return `${sourceId}-${targetId}`;
-  };
+  // Generate link ID for comparison (currently unused but might be needed for future features)
+  // const getLinkId = (link: any): string => {
+  //   const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+  //   const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+  //   return `${sourceId}-${targetId}`;
+  // };
 
   const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}">
   <defs>

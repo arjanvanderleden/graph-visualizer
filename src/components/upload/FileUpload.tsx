@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useState } from 'react';
 import type { GraphData } from '../../types';
 import { PropertyMapper, type PropertyMapping } from './PropertyMapper';
@@ -19,9 +20,9 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
   const isDependencyFormat = (data: any): boolean => {
     if (!data || typeof data !== 'object') return false;
     if (!Array.isArray(data.nodes) || !Array.isArray(data.links)) return false;
-    
-    return data.nodes.every((node: any) => 
-      typeof node === 'object' && 
+
+    return data.nodes.every((node: any) =>
+      typeof node === 'object' &&
       typeof node.path === 'string' &&
       Array.isArray(node.imports) &&
       Array.isArray(node.exports) &&
@@ -34,12 +35,12 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
       typeof link.type === 'string'
     );
   };
-  
+
   const isGenericFormat = (data: any): boolean => {
     if (!data || typeof data !== 'object') return false;
     if (!Array.isArray(data.nodes)) return false;
     if (!Array.isArray(data.links) && !Array.isArray(data.edges)) return false;
-    
+
     // Check that nodes have at least some properties
     return data.nodes.length > 0 && typeof data.nodes[0] === 'object';
   };
@@ -56,7 +57,7 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
     try {
       const text = await file.text();
       const data = JSON.parse(text);
-      
+
       if (isDependencyFormat(data)) {
         // Process dependency format - links are already resolved by the dependency graph creator
         const processedData: GraphData = {
@@ -66,7 +67,7 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
           })),
           links: data.links // Use links directly as provided
         };
-        
+
         onDataLoaded(processedData);
       } else if (isGenericFormat(data)) {
         // Show property mapper for generic format
@@ -81,12 +82,12 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
       setIsLoading(false);
     }
   }, [onDataLoaded]);
-  
+
   const handleMapping = useCallback((mapping: PropertyMapping) => {
     if (!genericData) return;
-    
+
     const links = genericData[mapping.linkType] || [];
-    
+
     // Transform generic data to internal format
     const basicData: GraphData = {
       nodes: genericData.nodes.map((node: any) => ({
@@ -107,18 +108,18 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
         ...link
       }))
     };
-    
+
     // For generic data, use the mapped links directly
     const processedData: GraphData = {
       nodes: basicData.nodes,
       links: basicData.links // Use links as mapped from generic format
     };
-    
+
     setShowMapper(false);
     setGenericData(null);
     onDataLoaded(processedData);
   }, [genericData, onDataLoaded]);
-  
+
   const handleCancelMapping = useCallback(() => {
     setShowMapper(false);
     setGenericData(null);
@@ -128,7 +129,7 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     if (files.length > 0) {
       processFile(files[0]);
@@ -147,8 +148,8 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
       <div
         className={`
           relative rounded-2xl p-12 text-center transition-all duration-300
-          ${isDragOver 
-            ? 'bg-white/15 backdrop-blur-lg shadow-neumorphic-inset scale-[1.02]' 
+          ${isDragOver
+            ? 'bg-white/15 backdrop-blur-lg shadow-neumorphic-inset scale-[1.02]'
             : 'bg-white/10 backdrop-blur-lg shadow-neumorphic hover:shadow-neumorphic-inset'
           }
           ${isLoading ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}
@@ -169,19 +170,19 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
           className="hidden"
           disabled={isLoading}
         />
-        
+
         <div className="space-y-6">
           <div className="mx-auto w-16 h-16 text-gray-500">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={1.5} 
-                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
               />
             </svg>
           </div>
-          
+
           <div>
             <p className="text-lg font-medium text-gray-700">
               {isLoading ? 'Processing...' : 'Upload Graph Data'}
@@ -193,7 +194,7 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
               Supports dependency graph JSON format
             </p>
           </div>
-          
+
           <div className="mt-6 space-y-3">
             {(isLoading || error) && (
               <button
@@ -208,7 +209,7 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
                 {isLoading ? 'Cancel Upload' : 'Clear Error'}
               </button>
             )}
-            
+
             {showCancel && onCancel && (
               <button
                 onClick={onCancel}
@@ -220,13 +221,13 @@ export function FileUpload({ onDataLoaded, onCancel, showCancel = false, classNa
           </div>
         </div>
       </div>
-      
+
       {error && (
         <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-xl shadow-neumorphic-inset">
           <p className="text-sm text-red-400">{error}</p>
         </div>
       )}
-      
+
       {showMapper && genericData && (
         <PropertyMapper
           data={genericData}

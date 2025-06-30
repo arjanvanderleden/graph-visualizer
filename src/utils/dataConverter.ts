@@ -4,7 +4,7 @@ export interface MinimalNode {
   id: string;
   label: string;
   type?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   x?: number;
   y?: number;
 }
@@ -14,7 +14,7 @@ export interface MinimalLink {
   target: string;
   type?: string;
   weight?: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface MinimalGraphData {
@@ -53,7 +53,7 @@ export function convertMinimalToComplex(minimalData: MinimalGraphData): ComplexG
   return {
     nodes: minimalData.nodes.map(node => ({
       id: node.id,
-      path: node.metadata?.path || node.label,
+      path: (node.metadata?.path as string) || node.label,
       imports: [],
       exports: [],
       declarations: [],
@@ -63,7 +63,7 @@ export function convertMinimalToComplex(minimalData: MinimalGraphData): ComplexG
     links: minimalData.links.map(link => ({
       source: link.source,
       target: link.target,
-      imports: link.metadata?.imports || [],
+      imports: (link.metadata?.imports as string[]) || [],
       type: link.type || 'unknown'
     }))
   };

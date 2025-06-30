@@ -1,1 +1,2 @@
-export { GraphProvider, useGraph } from './GraphContext';
+export { GraphProvider } from "./GraphProvider";
+export { useGraph } from "./useGraph";

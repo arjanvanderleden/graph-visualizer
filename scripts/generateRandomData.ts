@@ -145,7 +145,7 @@ function generateDeclarations(path: string, moduleType: keyof typeof MODULE_TYPE
     const name = randomChoice(exportNames) + (i > 0 ? i : '');
     const isDefault = i === 0 && Math.random() > 0.5;
     
-    let declaration: Declaration = {
+    const declaration: Declaration = {
       name,
       isExported: true,
       isDefault,
@@ -314,7 +314,7 @@ function main() {
   // Ensure output directory exists
   try {
     mkdirSync('data', { recursive: true });
-  } catch (e) {
+  } catch {
     // Directory might already exist
   }
   

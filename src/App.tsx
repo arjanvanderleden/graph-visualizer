@@ -4,12 +4,19 @@ import { FileUpload } from './components/upload';
 import { GraphVisualization } from './components/graph';
 import { GraphSearch } from './components/search';
 import { FilterComponent } from './components/filter';
+import { GraphTaskbar } from './components/ui';
+import { GraphInsights } from './components/insights';
 import { downloadSVG, downloadPNG, findConnectedEntities } from './utils';
+import type { D3Node, D3Link } from './types';
+import { formatNodeForDisplay, formatLinkForDisplay, copyToClipboard } from './utils/formatters';
+import { CopyIcon } from './components/ui/Icons';
 
 function AppContent() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [showFileUpload, setShowFileUpload] = useState(false);
-  const { state, setData, selectNode, setConnectedEntities } = useGraph();
+  const [hoveredNode, setHoveredNode] = useState<D3Node | null>(null);
+  const [hoveredLink, setHoveredLink] = useState<D3Link | null>(null);
+  const { state, filteredData, setData, selectNode, setConnectedEntities } = useGraph();
 
   useEffect(() => {
     const updateSize = () => {
@@ -24,23 +31,23 @@ function AppContent() {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const mainWidth = windowSize.width;
-  const mainHeight = windowSize.height - 64;
+  // const mainWidth = windowSize.width;
+  // const mainHeight = windowSize.height - 64;
 
   const handleEntitySelect = (entityId: string) => {
     // Select the entity and find its connected entities
     selectNode(entityId);
-    if (state.data) {
-      const connected = findConnectedEntities(state.data, entityId, null);
+    if (filteredData) {
+      const connected = findConnectedEntities(filteredData, entityId, null);
       setConnectedEntities(connected);
     }
   };
 
-  // Helper function to truncate paths with ellipsis at start
-  const truncatePath = (path: string, maxLength: number = 40) => {
-    if (path.length <= maxLength) return path;
-    return '...' + path.slice(-(maxLength - 3));
+  const handleHoverChange = (node: D3Node | null, link: D3Link | null) => {
+    setHoveredNode(node);
+    setHoveredLink(link);
   };
+
 
   return (
     <div className="min-h-screen relative bg-gradient-to-br from-gray-100 to-gray-200">
@@ -51,6 +58,7 @@ function AppContent() {
             width={windowSize.width}
             height={windowSize.height}
             className="w-full h-full"
+            onHoverChange={handleHoverChange}
           />
         </div>
       ) : (
@@ -76,7 +84,25 @@ function AppContent() {
         <div className="ml-auto flex items-center space-x-4">
           {state.data && (
             <div className="text-sm text-gray-600">
-              {state.data.nodes.length} nodes · {state.data.links.length} links
+              {filteredData ? (
+                filteredData.nodes.length !== state.data.nodes.length || 
+                filteredData.links.length !== state.data.links.length ? (
+                  // Show filtered vs total when filtering is active
+                  <span>
+                    {filteredData.nodes.length} / {state.data.nodes.length} nodes · {' '}
+                    {filteredData.links.length} / {state.data.links.length} links
+                  </span>
+                ) : (
+                  // Show total when no filtering
+                  <span>
+                    {state.data.nodes.length} nodes · {state.data.links.length} links
+                  </span>
+                )
+              ) : (
+                <span>
+                  {state.data.nodes.length} nodes · {state.data.links.length} links
+                </span>
+              )}
             </div>
           )}
         </div>
@@ -90,6 +116,11 @@ function AppContent() {
             {/* Filter */}
             <div>
               <FilterComponent />
+            </div>
+
+            {/* Insights */}
+            <div>
+              <GraphInsights />
             </div>
 
             {/* Search */}
@@ -152,19 +183,50 @@ function AppContent() {
           </div>
 
           {state.viewState.selectedNode && (() => {
-            const node = state.data?.nodes.find(n => n.id === state.viewState.selectedNode);
+            const node = filteredData?.nodes.find(n => n.id === state.viewState.selectedNode);
+            if (!node) return null;
+            
+            const formatted = formatNodeForDisplay(node);
+            const fullPath = formatted.pathParent 
+              ? `${formatted.pathParent}/${formatted.pathFile}`
+              : formatted.pathFile;
+            
+            const handleCopyPath = async () => {
+              const success = await copyToClipboard(fullPath);
+              if (success) {
+                // You could add a toast notification here
+                console.log('Path copied to clipboard');
+              }
+            };
+            
             return (
               <div className="mt-6">
-                <h2 className="text-base font-medium mb-4 text-gray-700">
-                  Selected Node
-                </h2>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-base font-medium text-gray-700">
+                    Selected Node
+                  </h2>
+                  <button
+                    onClick={handleCopyPath}
+                    className="p-1.5 rounded-lg bg-gradient-to-br from-gray-50 to-gray-200 shadow-neumorphic-raised hover:shadow-neumorphic-pressed active:shadow-neumorphic-pressed transition-all duration-200 flex items-center justify-center group"
+                    title="Copy path to clipboard"
+                  >
+                    <CopyIcon className="text-gray-600 group-hover:text-gray-800" size={12} />
+                  </button>
+                </div>
                 <div className="p-4 rounded-xl bg-green-100/60 backdrop-blur-sm shadow-neumorphic-inset text-sm border border-green-200/40">
-                  <div className="font-medium text-gray-700 mb-2" title={node?.path || state.viewState.selectedNode}>
-                    {truncatePath(node?.path || state.viewState.selectedNode)}
+                  <div className="font-medium text-gray-700 mb-2 truncate" title={fullPath}>
+                    {formatted.pathFile}
+                    {formatted.pathParent && (
+                      <span className="text-gray-500 text-xs ml-1">({formatted.pathParent})</span>
+                    )}
                   </div>
-                  {node?.declarations && node.declarations.length > 0 && (
+                  {formatted.declarations.size > 0 && (
                     <div className="text-xs text-gray-600 mb-2">
-                      {node.declarations.length} declaration{node.declarations.length !== 1 ? 's' : ''}
+                      {Array.from(formatted.declarations.entries()).map(([type, names]) => (
+                        <div key={type} className="truncate">
+                          <span className="font-medium">{type}:</span> {names}
+                        </div>
+                      ))}
                     </div>
                   )}
                   {node?.imports && node.imports.length > 0 && (
@@ -178,39 +240,55 @@ function AppContent() {
           })()}
 
           {state.viewState.selectedLink && (() => {
-            const link = state.data?.links.find(l => {
+            const link = filteredData?.links.find(l => {
               const sourceId = typeof l.source === 'string' ? l.source : l.source.id;
               const targetId = typeof l.target === 'string' ? l.target : l.target.id;
               return `${sourceId}-${targetId}` === state.viewState.selectedLink;
             });
             if (!link) return null;
 
-            const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
-            const targetId = typeof link.target === 'string' ? link.target : link.target.id;
-            const sourceNode = state.data?.nodes.find(n => n.id === sourceId);
-            const targetNode = state.data?.nodes.find(n => n.id === targetId);
+            const formatted = formatLinkForDisplay(link);
+            const linkText = `${formatted.from} → ${formatted.to}`;
+            
+            const handleCopyLink = async () => {
+              const success = await copyToClipboard(linkText);
+              if (success) {
+                console.log('Link copied to clipboard');
+              }
+            };
 
             return (
               <div className="mt-6">
-                <h2 className="text-base font-medium mb-4 text-gray-700">
-                  Selected Link
-                </h2>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-base font-medium text-gray-700">
+                    Selected Link
+                  </h2>
+                  <button
+                    onClick={handleCopyLink}
+                    className="p-1.5 rounded-lg bg-gradient-to-br from-gray-50 to-gray-200 shadow-neumorphic-raised hover:shadow-neumorphic-pressed active:shadow-neumorphic-pressed transition-all duration-200 flex items-center justify-center group"
+                    title="Copy link to clipboard"
+                  >
+                    <CopyIcon className="text-gray-600 group-hover:text-gray-800" size={12} />
+                  </button>
+                </div>
                 <div className="p-4 rounded-xl bg-green-100/60 backdrop-blur-sm shadow-neumorphic-inset text-sm border border-green-200/40">
                   <div className="font-medium text-gray-700 mb-2">
                     {link.type} dependency
                   </div>
                   <div className="text-xs text-gray-600 space-y-1">
-                    <div className="truncate" title={sourceNode?.path || sourceId}>
-                      From: {truncatePath(sourceNode?.path || sourceId, 30)}
-                    </div>
-                    <div className="truncate" title={targetNode?.path || targetId}>
-                      To: {truncatePath(targetNode?.path || targetId, 30)}
+                    <div className="truncate" title={linkText}>
+                      {formatted.from} → {formatted.to}
                     </div>
                     {link.imports && link.imports.length > 0 && (
-                      <div className="mt-2">
-                        Imports: {link.imports.map(imp =>
-                          typeof imp === 'string' ? imp : (imp.name || imp.importedName || String(imp))
-                        ).join(', ')}
+                      <div className="mt-2 truncate">
+                        Imports: {link.imports.map(imp => {
+                          if (typeof imp === 'string') return imp;
+                          if (imp && typeof imp === 'object') {
+                            const impObj = imp as Record<string, unknown>;
+                            return impObj.name || impObj.importedName || String(imp);
+                          }
+                          return String(imp);
+                        }).join(', ')}
                       </div>
                     )}
                   </div>
@@ -226,18 +304,44 @@ function AppContent() {
               </h2>
               <div className="space-y-2 max-h-40 overflow-y-auto">
                 {Array.from(state.viewState.connectedEntities).map(entityId => {
-                  const node = state.data?.nodes.find(n => n.id === entityId);
+                  const node = filteredData?.nodes.find(n => n.id === entityId);
+                  if (!node) return null;
+                  
+                  const formatted = formatNodeForDisplay(node);
+                  const fullPath = formatted.pathParent 
+                    ? `${formatted.pathParent}/${formatted.pathFile}`
+                    : formatted.pathFile;
+                  
+                  const handleCopyEntityPath = async (e: React.MouseEvent) => {
+                    e.stopPropagation();
+                    const success = await copyToClipboard(fullPath);
+                    if (success) {
+                      console.log('Entity path copied to clipboard');
+                    }
+                  };
+                  
                   return (
                     <div
                       key={entityId}
-                      className="p-3 rounded-xl bg-blue-100/50 backdrop-blur-sm shadow-neumorphic-inset text-sm border border-blue-200/30 cursor-pointer hover:bg-blue-100/70 transition-colors duration-200"
+                      className="p-3 rounded-xl bg-blue-100/50 backdrop-blur-sm shadow-neumorphic-inset text-sm border border-blue-200/30 cursor-pointer hover:bg-blue-100/70 transition-colors duration-200 group"
                       onClick={() => handleEntitySelect(entityId)}
                     >
-                      <div className="font-medium truncate text-gray-700">
-                        {node?.path?.split('/').pop() || entityId}
-                      </div>
-                      <div className="text-xs text-gray-600 truncate" title={node?.path || entityId}>
-                        {truncatePath(node?.path || entityId, 35)}
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium truncate text-gray-700">
+                            {formatted.pathFile}
+                          </div>
+                          <div className="text-xs text-gray-600 truncate" title={fullPath}>
+                            {formatted.pathParent || 'No parent path'}
+                          </div>
+                        </div>
+                        <button
+                          onClick={handleCopyEntityPath}
+                          className="opacity-0 group-hover:opacity-100 p-1 rounded bg-blue-200/50 hover:bg-blue-300/50 transition-all duration-200"
+                          title="Copy path to clipboard"
+                        >
+                          <CopyIcon className="text-gray-600" size={10} />
+                        </button>
                       </div>
                     </div>
                   );
@@ -246,6 +350,16 @@ function AppContent() {
             </div>
           )}
         </aside>
+      )}
+      
+      {/* Taskbar at bottom */}
+      {state.data && !showFileUpload && (
+        <div className="fixed bottom-0 left-0 right-0 z-50">
+          <GraphTaskbar
+            hoveredNode={hoveredNode}
+            hoveredLink={hoveredLink}
+          />
+        </div>
       )}
     </div>
   );

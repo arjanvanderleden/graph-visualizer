@@ -14,22 +14,22 @@ export function GraphSearch({ className = '' }: GraphSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   
-  const { state } = useGraph();
+  const { filteredData } = useGraph();
 
   // Search when term changes
   useEffect(() => {
-    if (!searchTerm.trim() || !state.data) {
+    if (!searchTerm.trim() || !filteredData) {
       setResults([]);
       setIsOpen(false);
       setSelectedIndex(-1);
       return;
     }
 
-    const searchResults = searchGraphEntities(state.data, searchTerm);
+    const searchResults = searchGraphEntities(filteredData, searchTerm);
     setResults(searchResults);
     setIsOpen(searchResults.length > 0);
     setSelectedIndex(-1);
-  }, [searchTerm, state.data]);
+  }, [searchTerm, filteredData]);
 
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {

@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
+import type { UnknownGraphData } from '../../types';
 
 interface PropertyMapperProps {
-  data: any;
+  data: UnknownGraphData;
   onMapping: (mapping: PropertyMapping) => void;
   onCancel: () => void;
 }
@@ -17,51 +18,51 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
   const [nodeId, setNodeId] = useState<string>('');
   const [linkSource, setLinkSource] = useState<string>('');
   const [linkTarget, setLinkTarget] = useState<string>('');
-  
+
   // Detect if data has links or edges
   const linkType = useMemo(() => {
     if (data.links && Array.isArray(data.links)) return 'links';
     if (data.edges && Array.isArray(data.edges)) return 'edges';
     return 'links';
   }, [data]);
-  
+
   // Extract string/number properties from first node
   const nodeProperties = useMemo(() => {
     if (!data.nodes || !Array.isArray(data.nodes) || data.nodes.length === 0) {
       return [];
     }
-    
+
     const firstNode = data.nodes[0];
     const props: string[] = [];
-    
+
     for (const [key, value] of Object.entries(firstNode)) {
       if (typeof value === 'string' || typeof value === 'number') {
         props.push(key);
       }
     }
-    
+
     return props;
   }, [data.nodes]);
-  
+
   // Extract string/number properties from first link/edge
   const linkProperties = useMemo(() => {
     const links = data[linkType];
     if (!links || !Array.isArray(links) || links.length === 0) {
       return [];
     }
-    
+
     const firstLink = links[0];
     const props: string[] = [];
-    
+
     for (const [key, value] of Object.entries(firstLink)) {
       if (typeof value === 'string' || typeof value === 'number') {
         props.push(key);
       }
     }
-    
+
     return props;
   }, [data, linkType]);
-  
+
   // Auto-detect common property names
   useMemo(() => {
     // Auto-select node ID
@@ -72,7 +73,7 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
         break;
       }
     }
-    
+
     // Auto-select link source
     const sourceCandidates = ['source', 'from', 'src', 'sourceId', 'source_id'];
     for (const candidate of sourceCandidates) {
@@ -81,7 +82,7 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
         break;
       }
     }
-    
+
     // Auto-select link target
     const targetCandidates = ['target', 'to', 'dest', 'targetId', 'target_id'];
     for (const candidate of targetCandidates) {
@@ -91,7 +92,7 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
       }
     }
   }, [nodeProperties, linkProperties]);
-  
+
   const handleSubmit = () => {
     if (nodeId && linkSource && linkTarget) {
       onMapping({
@@ -102,20 +103,20 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
       });
     }
   };
-  
+
   const isValid = nodeId && linkSource && linkTarget;
-  
+
   return (
     <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 max-w-md w-full shadow-neumorphic">
         <h2 className="text-lg font-medium text-gray-700 mb-4">
           Map Graph Properties
         </h2>
-        
+
         <p className="text-sm text-gray-600 mb-6">
           Select which properties to use for the graph visualization
         </p>
-        
+
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -134,7 +135,7 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
               ))}
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {linkType === 'edges' ? 'Edge' : 'Link'} Source
@@ -152,7 +153,7 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
               ))}
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {linkType === 'edges' ? 'Edge' : 'Link'} Target
@@ -171,7 +172,7 @@ export function PropertyMapper({ data, onMapping, onCancel }: PropertyMapperProp
             </select>
           </div>
         </div>
-        
+
         <div className="flex gap-3 mt-6">
           <button
             onClick={onCancel}
